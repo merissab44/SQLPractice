@@ -7,6 +7,12 @@
  * Note that album - song is a one-to-many relationship, so no bridge table is needed.
  */
 
+ CREATE TABLE songs (
+     id INTEGER PRIMARY KEY AUTOINCREMENT,
+     title VARCHAR(60) NOT NULL,
+     FOREIGN KEY (album_id)  
+ );
+
 CREATE TABLE Albums (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     name VARCHAR(70) NOT NULL,
@@ -28,6 +34,15 @@ VALUES
     ('California', 'Blink-182', 2016)
 ;
 
+INSERT INTO songs 
+        (title)
+VALUES
+    ('We Are Young')
+    ('Canceled')
+    ('Rotation')
+    ('Stranger')
+;
+
 /* Required to get result in column format */
 .headers on
 .mode column
@@ -35,7 +50,7 @@ VALUES
 
 /* Queries */
 
--- SELECT * FROM Songs;
+SELECT * FROM Songs;
 
 SELECT * FROM Albums;
 
