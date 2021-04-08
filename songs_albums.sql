@@ -7,17 +7,18 @@
  * Note that album - song is a one-to-many relationship, so no bridge table is needed.
  */
 
- CREATE TABLE songs (
-     id INTEGER PRIMARY KEY AUTOINCREMENT,
-     title VARCHAR(60) NOT NULL,
-     FOREIGN KEY (album_id)  
- );
-
 CREATE TABLE Albums (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     name VARCHAR(70) NOT NULL,
     artist VARCHAR(70) NOT NULL,
     year_published INTEGER NOT NULL
+);
+
+CREATE TABLE Songs(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    title VARCHAR(100) NOT NULL,
+    album_id INT NOT NULL,
+    FOREIGN KEY (album_id) REFERENCES Albums(id)
 );
 
 /* 
@@ -27,20 +28,21 @@ CREATE TABLE Albums (
 INSERT INTO Albums
     (name, artist, year_published)
 VALUES
-    ('The Dark Side of the Moon', 'Pink Floyd', 1973),
-    ('Abbey Road', 'The Beatles', 1969),
+    ('Wonder', 'Shawn Mendes', 2020),
+    ('Clouds', 'NF', 2021),
     ('Hotel California', 'Eagles', 1976),
-    ('Born in the U.S.A.', 'Bruce Springsteen', 1984),
-    ('California', 'Blink-182', 2016)
+    ('Shine', 'P-LO', 2020),
+    ('The Beautiful and Damned', 'G-Eazy', 2020)
 ;
 
-INSERT INTO songs 
-        (title)
+INSERT INTO Songs 
+    (title, album_id)
 VALUES
-    ('We Are Young')
-    ('Canceled')
-    ('Rotation')
-    ('Stranger')
+    ('Look up at the Stars',1),
+    ('Layers',2),
+    ('Rotation',3),
+    ('Shine',4),
+    ('Boss Tycoon',5)
 ;
 
 /* Required to get result in column format */
@@ -49,15 +51,19 @@ VALUES
 
 
 /* Queries */
-
 SELECT * FROM Songs;
+SELECT"";
 
 SELECT * FROM Albums;
-
+SELECT "";
 /* 
  * TODO: Write a table join query to construct a table of Song Name : Album Name
  */
 
+SELECT Albums.id, Albums.name, Songs.title FROM Albums
+JOIN Songs 
+ON Albums.id = 
+Songs.album_id;
 /*
  * TODO: Find all albums published between 1970 and 1980.
  */
